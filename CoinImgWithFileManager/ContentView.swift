@@ -8,9 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let columns: [GridItem] = [GridItem(.flexible()) , GridItem(.flexible())]
+    @StateObject var vm = ViewModel()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ScrollView() {
+            LazyVGrid(columns: columns, alignment: .center, spacing: 10, pinnedViews: []) {
+                ForEach(vm.coin) { coin in
+//                    AsyncImage(url: URL(string: coin.image)!) { image in
+//                        image
+//                            .resizable()
+//                            .frame(width: 150, height: 150)
+//                    } placeholder: {
+//                        ProgressView()
+//                    }
+//                    .padding(.vertical, 30)
+                    CoinRowView(coin: coin)
+                        .padding()
+                }
+            }
+        }
     }
 }
 
